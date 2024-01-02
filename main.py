@@ -7,7 +7,7 @@ def sobeys_walmart_flyer(url):
     if draft_flyer_file == -1:
         print("error in getting flyer data")
         return
-    data_clean.clean_sobeys_data(draft_flyer_file,shopName)
+    data_clean.clean_data(draft_flyer_file,shopName)
 
 
 # Press the green button in the gutter to run the script.

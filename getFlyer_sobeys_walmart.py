@@ -87,7 +87,6 @@ def getFlyer(url):
     wait = WebDriverWait(driver, 30)
     wait.until(lambda d: d.execute_script("return document.readyState === 'complete';"))
 
-    # Attempt to find the iframe
     try:
         # Locate the parent element <DONT try to locate the iframe directly>
         parent_element = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, groceryData[groceryShop]["iframeParentSelector"])))
@@ -118,6 +117,7 @@ def getFlyer(url):
                 }
                 all_items.append(item_data)
 
+        # Save to csv file
         csvFileName = groceryData[groceryShop]["csvFileName"]
         csvFilePath = saveFile(groceryShop, csvFileName, all_items)
         return csvFilePath,groceryShop

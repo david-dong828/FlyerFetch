@@ -1,11 +1,12 @@
 # Name: Dong Han
 # Mail: dongh@mun.ca
-# Used to clean the saved csv to make it more structed
+
+# Used to clean the saved csv to make it more struct
 
 import pandas as pd
 import re,os
 
-def parse_sobeys_aria_label(aria_label):
+def parse_aria_label(aria_label):
     # Extracting name, which is before the first comma
     name = aria_label.split(',')[0].strip()
 
@@ -30,12 +31,12 @@ def parse_sobeys_aria_label(aria_label):
 
     return name, price, measurement, remark
 
-def clean_sobeys_data(fileName,shopName):
+def clean_data(fileName,shopName):
     df = pd.read_csv(fileName)
-    parsed_aria_label_combined_rest = [(*parse_sobeys_aria_label(label),item_type,item_id,item_type_number)
+    parsed_aria_label_combined_rest = [(*parse_aria_label(label),item_type,item_id,item_type_number)
                          for label,item_type,item_id,item_type_number in
                          zip(df["aria-label"],df["item-type"],df["item-id"],df["item-type-number"])
-                         if parse_sobeys_aria_label(label)[1]] # to check if price is none
+                         if parse_aria_label(label)[1]] # to check if price is none
     new_df = pd.DataFrame(parsed_aria_label_combined_rest,
                              columns=["name", "price", "measurement", "remark","item-type","item-id","item-type-number"])
 
@@ -51,9 +52,8 @@ def clean_sobeys_data(fileName,shopName):
     print(f"the {shopName} data is Cleaned and Saved as '{newFileName}' in folder '{folder_path}'")
 
 
-
 def main():
-    clean_sobeys_data(r"scraped_draft_data/sobeysFlyer_2024-01-01.csv","sobeys")
+    clean_data(r"scraped_draft_data/sobeysFlyer_2024-01-02.csv","sobeys")
 
 if __name__ == '__main__':
     main()
