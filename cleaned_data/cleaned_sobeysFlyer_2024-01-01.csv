@@ -1,25 +1,25 @@
 name,price,measurement,remark,item-type,item-id,item-type-number
-Fresh Pork Loin Back Ribs,$3.99,1,"Fresh Pork Loin Back Ribs, , $3.99 /lb",flyer-item,807486661,1
+Fresh Pork Loin Back Ribs,$3.99,lb,"Fresh Pork Loin Back Ribs, , $3.99 /lb",flyer-item,807486661,1
 Bacon,$5.99,1,"Bacon, , $5.99",flyer-item,807486662,1
 ASIAN INSPIRATIONS,$5,1,"ASIAN INSPIRATIONS, WONG WING Frozen Entrées, Egg Rolls, Spring Rolls or Dumplings, , $5 EACH WHEN YOU BUY 2 OR MORE.",flyer-item,807486663,1
 Almond Beverages,$2.88,1,"Almond Beverages, HOT PRICE, $2.88",flyer-item,807486664,1
 COMPLIMENTS Frozen Fruit,$3.99,1,"COMPLIMENTS Frozen Fruit, , $3.99",flyer-item,807486665,1
 Snacking Crackers,$6.99,3,"Snacking Crackers, HOT PRICE, 3/ $6.99",flyer-item,807486666,1
 Large Avocados or Large Red Mangoes,$4.98,3,"Large Avocados or Large Red Mangoes, , 3/ $4.98",flyer-item,807486667,1
-Live Market Lobsters,$16.99,1,"Live Market Lobsters, , $16.99 /lb",flyer-item,807486668,1
+Live Market Lobsters,$16.99,lb,"Live Market Lobsters, , $16.99 /lb",flyer-item,807486668,1
 Fresh Boneless Striploin Grilling Steak or Premium Oven Roast,$8.88,1,"Fresh Boneless Striploin Grilling Steak or Premium Oven Roast, , $8.88",flyer-item,807486669,1
 English Seedless Cucumbers,$1.99,1,"English Seedless Cucumbers, , $1.99",flyer-item,807486670,1
 Dips,$2,1,"Dips, , $2",flyer-item,807486671,1
 COCA-COLA or PEPSI Soft Drinks,$6,2,"COCA-COLA or PEPSI Soft Drinks, , 2/ $6",flyer-item,807486672,1
 FRESH CHOICE Oysters,$1.25,1,"FRESH CHOICE Oysters, , $1.25",flyer-item,807486673,1
 Fair Trade Honduras White Shrimp or Wild Argentinian Pink Shrimp,$8.99,1,"Fair Trade Honduras White Shrimp or Wild Argentinian Pink Shrimp, , $8.99",flyer-item,807486674,1
-Coho Salmon Fillets,$11.99,1,"Coho Salmon Fillets, , $11.99 /lb",flyer-item,807486675,1
+Coho Salmon Fillets,$11.99,lb,"Coho Salmon Fillets, , $11.99 /lb",flyer-item,807486675,1
 Atlantic Canada Cooked Snow Crab Clusters or Lobster Claws,$16.99,1,"Atlantic Canada Cooked Snow Crab Clusters or Lobster Claws, , $16.99",flyer-item,807486676,1
 COMPLIMENTS NATURALLY SIMPLE Sea Scallops or Black Tiger Shrimp Colossal Raw or Jumbo Cooked in ring with sauce,$19.99,1,"COMPLIMENTS NATURALLY SIMPLE Sea Scallops or Black Tiger Shrimp Colossal Raw or Jumbo Cooked in ring with sauce, , $19.99",flyer-item,807486677,1
 Source Yogurt,$3.49,1,"Source Yogurt, Get 300 Scene+ when you buy 6 or more OR Get 300 Scene+ when you buy 3 or more, $3.49",flyer-item,807486678,1
 Premium Cereal,$3.97,1,"Premium Cereal, 1000 Scene+ PTS when you buy 6, $3.97",flyer-item,807486679,1
 NATURE VALLEY Midsize,$6.99,1,"NATURE VALLEY Midsize, 300 Scene+ PTS when you buy 2, $6.99",flyer-item,807486680,1
-In-Store Ground Beef Meatballs or Meatloaf,$6.49,1,"In-Store Ground Beef Meatballs or Meatloaf, , $6.49 /lb",flyer-item,807486681,1
+In-Store Ground Beef Meatballs or Meatloaf,$6.49,lb,"In-Store Ground Beef Meatballs or Meatloaf, , $6.49 /lb",flyer-item,807486681,1
 Seafood Appetizers,$8.99,1,"Seafood Appetizers, GET UP TO 600 SCENE+ PTS, STARTING AT $8.99",flyer-item,807486682,1
 BOURSIN,$5.99,1,"BOURSIN, , $5.99",flyer-item,807486683,1
 Antipasto Classico,$11,1,"Antipasto Classico, , STARTING AT $11",flyer-item,807486685,1
@@ -39,7 +39,7 @@ Breton or Vinta Crackers,$2.33,1,"Breton or Vinta Crackers, , $2.33",flyer-item,
 Margarine,$6.99,1,"Margarine, , $6.99",flyer-item,807486699,1
 NABOB Ground Coffee,$12.99,1,"NABOB Ground Coffee, , $12.99",flyer-item,807486700,1
 Whole Grain Bread,$7,2,"Whole Grain Bread, , 2/ $7",flyer-item,807486701,1
-In-Store Ground Beef Meatballs or Meatloaf,$6.49,1,"In-Store Ground Beef Meatballs or Meatloaf, , $6.49 /lb",flyer-item,807486681,1
+In-Store Ground Beef Meatballs or Meatloaf,$6.49,lb,"In-Store Ground Beef Meatballs or Meatloaf, , $6.49 /lb",flyer-item,807486681,1
 Antipasto Classico,$11,1,"Antipasto Classico, , STARTING AT $11",flyer-item,807486685,1
 Goldfish Crackers,$3.33,1,"Goldfish Crackers, LOAD IT TO GET IT! Get 150 Scene+ PTS when you buy 3 and load offer in the Sobeys app or at MyGroceryOffers.ca, $3.33 EACH WHEN YOU BUY 3 OR MORE.",flyer-item,807486702,1
 Prepared Fresh Daily Fruit or Vegetable Grab and Go Tray,$24,2,"Prepared Fresh Daily Fruit or Vegetable Grab and Go Tray, , 2/ $24 or $12.99 ea",flyer-item,807486710,1
@@ -47,12 +47,12 @@ Carrot and Roasted Garlic or Carmelized Onion and Roasted Garlic Cooked Potatoes
 Buns,$4.49,1,"Buns, 80 Scene+ PTS when you buy 2, $4.49",flyer-item,807486713,1
 Large Avocados,$4.98,3,"Large Avocados, , 3/ $4.98",flyer-item,807486714,1
 Cilantro Bunch,$1.99,1,"Cilantro Bunch, , $1.99",flyer-item,807486715,1
-Bulk Red Onions,$2.49,1,"Bulk Red Onions, , $2.49 /lb",flyer-item,807486716,1
-Tomatoes,$2.99,1,"Tomatoes, , $2.99 /lb",flyer-item,807486717,1
+Bulk Red Onions,$2.49,lb,"Bulk Red Onions, , $2.49 /lb",flyer-item,807486716,1
+Tomatoes,$2.99,lb,"Tomatoes, , $2.99 /lb",flyer-item,807486717,1
 Dessert Bars Nanaimo,$6.69,1,"Dessert Bars Nanaimo, Macaroon Madness, 140 Scene+ PTS when you buy 2, $6.69",flyer-item,807486718,1
 Salad,$4.99,1,"Salad, , $4.99",flyer-item,807486719,1
 Limes,$4.99,1,"Limes, , $4.99",flyer-item,807486720,1
-Peppers,$6.99,1,"Peppers, , $6.99 /lb",flyer-item,807486721,1
+Peppers,$6.99,lb,"Peppers, , $6.99 /lb",flyer-item,807486721,1
 Grands or Ready To Bake Cookies,$3.99,1,"Grands or Ready To Bake Cookies, 200 Scene+ PTS when you buy 3, $3.99",flyer-item,807486722,1
 All-Day Breakfast Hashbrowns,$3.99,1,"All-Day Breakfast Hashbrowns, , $3.99",flyer-item,807486723,1
 Dip,$2.49,1,"Dip, , $2.49",flyer-item,807486724,1
@@ -76,34 +76,34 @@ GLAD Garbage Bags,$10.99,1,"GLAD Garbage Bags, 300 Scene+ PTS when you buy 2, $1
 Laundry Detergent,$25.99,1,"Laundry Detergent, 500 Scene+ PTS when you buy 2, $25.99",flyer-item,807486742,1
 COMPLIMENTS or PANACHE Pork Back Ribs,$5.99,1,"COMPLIMENTS or PANACHE Pork Back Ribs, Chicken Wings, Meat Appetizers, Meatballs, Egg Rolls or Spring Rolls, , Buy 2 Get 1 FREE* starting at $5.99 ea",flyer-item,807486731,1
 Made-to-order trays,$100,1,"Made-to-order trays, Get 1000 Scene+ PTS When you spend $100 or Get 2500 Scene+ PTS When you spend $200 or more,",flyer-item,807486743,1
-Fresh Boneless Blade or Cross Rib Pot Roast or Simmering Steak,$9.99,1,"Fresh Boneless Blade or Cross Rib Pot Roast or Simmering Steak, , $9.99 /lb",flyer-item,807486745,1
-Fresh Boneless Bottom Sirloin Tri Tip Grilling Steak or Premium Oven Roast,$12.99,1,"Fresh Boneless Bottom Sirloin Tri Tip Grilling Steak or Premium Oven Roast, , $12.99 /lb",flyer-item,807486746,1
-Seasoned Split Chicken Wings,$4.99,1,"Seasoned Split Chicken Wings, , $4.99 /lb",flyer-item,807486747,1
-Boneless Pork Sirloin Chops or Roasts,$3.99,1,"Boneless Pork Sirloin Chops or Roasts, , $3.99 /lb",flyer-item,807486748,1
-Flattened Chicken,$5.99,1,"Flattened Chicken, 22 Scene+ PTS when you buy 1 pkg, $5.99 /lb",flyer-item,807486749,1
-Fresh Pork Shoulder Blade Roasts or Steak,$3.99,1,"Fresh Pork Shoulder Blade Roasts or Steak, , $3.99 /lb",flyer-item,807486750,1
+Fresh Boneless Blade or Cross Rib Pot Roast or Simmering Steak,$9.99,lb,"Fresh Boneless Blade or Cross Rib Pot Roast or Simmering Steak, , $9.99 /lb",flyer-item,807486745,1
+Fresh Boneless Bottom Sirloin Tri Tip Grilling Steak or Premium Oven Roast,$12.99,lb,"Fresh Boneless Bottom Sirloin Tri Tip Grilling Steak or Premium Oven Roast, , $12.99 /lb",flyer-item,807486746,1
+Seasoned Split Chicken Wings,$4.99,lb,"Seasoned Split Chicken Wings, , $4.99 /lb",flyer-item,807486747,1
+Boneless Pork Sirloin Chops or Roasts,$3.99,lb,"Boneless Pork Sirloin Chops or Roasts, , $3.99 /lb",flyer-item,807486748,1
+Flattened Chicken,$5.99,lb,"Flattened Chicken, 22 Scene+ PTS when you buy 1 pkg, $5.99 /lb",flyer-item,807486749,1
+Fresh Pork Shoulder Blade Roasts or Steak,$3.99,lb,"Fresh Pork Shoulder Blade Roasts or Steak, , $3.99 /lb",flyer-item,807486750,1
 Pork Ready to Heat Entrées,$14.99,1,"Pork Ready to Heat Entrées, 250 Scene+ PTS when you buy 2, $14.99",flyer-item,807486751,1
 Made Sausage Stuffed Mushroom Caps or Ground Beef Stuffed Peppers,$10,1,"Made Sausage Stuffed Mushroom Caps or Ground Beef Stuffed Peppers, 150 Scene+ PTS when you spend $10+, $5.99 /lb",flyer-item,807486752,1
 COMPLIMENTS Deli Sausage Stick,$4.49,1,"COMPLIMENTS Deli Sausage Stick, 100 Scene+ PTS when you buy 2, $4.49",flyer-item,807486753,1
 COMPLIMENTS Breaded Chicken Balls with Sweet & Sour Sauce or Frozen Breaded Chicken Burgers,$8.99,1,"COMPLIMENTS Breaded Chicken Balls with Sweet & Sour Sauce or Frozen Breaded Chicken Burgers, Strips or Popcorn Chicken, 180 Scene+ PTS when you buy 2, $8.99",flyer-item,807486754,1
 COMPLIMENTS Shepherd's or Farmhouse Pie,$14.99,1,"COMPLIMENTS Shepherd's or Farmhouse Pie, 150 Scene+ PTS when you buy 1, $14.99",flyer-item,807486755,1
 Breakfast or Dinner Pork Sausage,$5.99,1,"Breakfast or Dinner Pork Sausage, , $5.99",flyer-item,807486756,1
-Extra Large Red,$4.79,1,"Extra Large Red, Black or Green Seedless Grapes, , $4.79 /lb",flyer-item,807486757,1
+Extra Large Red,$4.79,lb,"Extra Large Red, Black or Green Seedless Grapes, , $4.79 /lb",flyer-item,807486757,1
 COMPLIMENTS Baby Spinach or Spring Mix,$6.99,1,"COMPLIMENTS Baby Spinach or Spring Mix, , $6.99",flyer-item,807486758,1
 COMPLIMENTS Mini Potatoes,$4.49,1,"COMPLIMENTS Mini Potatoes, 75 Scene+ PTS when you buy 2, $4.49",flyer-item,807486759,1
-Bosc or Red Pears,$3.49,1,"Bosc or Red Pears, , $3.49 /lb",flyer-item,807486760,1
+Bosc or Red Pears,$3.49,lb,"Bosc or Red Pears, , $3.49 /lb",flyer-item,807486760,1
 Mini Watermelon,$6.99,1,"Mini Watermelon, 100 Scene+ PTS when you buy 1, $6.99",flyer-item,807486761,1
-Cosmic Crisp Apples,$2.99,1,"Cosmic Crisp Apples, , $2.99 /lb",flyer-item,807486762,1
+Cosmic Crisp Apples,$2.99,lb,"Cosmic Crisp Apples, , $2.99 /lb",flyer-item,807486762,1
 Artichokes,$3.99,1,"Artichokes, , $3.99",flyer-item,807486763,1
 Tomatoes,$5.99,1,"Tomatoes, 50 Scene+ PTS when you buy 1, $5.99",flyer-item,807486764,1
 Mini Sweet Peppers,$6.49,1,"Mini Sweet Peppers, , $6.49",flyer-item,807486765,1
 COMPLIMENTS Extra Large Shrimp in Ring with Cocktail Sauce 312 g,$10,1,"COMPLIMENTS Extra Large Shrimp in Ring with Cocktail Sauce 312 g, , $10",flyer-item,807486766,1
 COMPLIMENTS Large Cooked Shrimp in Ring with Cocktail Sauce 737 g,$20,1,"COMPLIMENTS Large Cooked Shrimp in Ring with Cocktail Sauce 737 g, , $20",flyer-item,807486767,1
 COMPLIMENTS Pacific White Shrimp with Cocktail Sauce 680 g,$15,1,"COMPLIMENTS Pacific White Shrimp with Cocktail Sauce 680 g, , $15",flyer-item,807486768,1
-Marinated and Glazed In-Store Chicken Wings,$5.99,1,"Marinated and Glazed In-Store Chicken Wings, 200 Scene+ PTS when you buy 1 pkg, $5.99 /lb",flyer-item,807486769,1
-Fresh BBQ Whiskey or Honey Garlic Marinated Pork Loin Back Ribs,$4.99,1,"Fresh BBQ Whiskey or Honey Garlic Marinated Pork Loin Back Ribs, , $4.99 /lb",flyer-item,807486770,1
-Fresh Boneless Korean BBQ or Maple Chipotle Marinated Bottom Sirloin Tri Tip Grilling Steak Cubes,$13.99,1,"Fresh Boneless Korean BBQ or Maple Chipotle Marinated Bottom Sirloin Tri Tip Grilling Steak Cubes, , $13.99 /lb",flyer-item,807486771,1
-Fresh Boneless Korean BBQ or Maple Chipotle Marinated Bottom Sirloin Tri Tip Grilling Steak Cubes,$13.99,1,"Fresh Boneless Korean BBQ or Maple Chipotle Marinated Bottom Sirloin Tri Tip Grilling Steak Cubes, , $13.99 /lb",flyer-item,807486771,1
+Marinated and Glazed In-Store Chicken Wings,$5.99,lb,"Marinated and Glazed In-Store Chicken Wings, 200 Scene+ PTS when you buy 1 pkg, $5.99 /lb",flyer-item,807486769,1
+Fresh BBQ Whiskey or Honey Garlic Marinated Pork Loin Back Ribs,$4.99,lb,"Fresh BBQ Whiskey or Honey Garlic Marinated Pork Loin Back Ribs, , $4.99 /lb",flyer-item,807486770,1
+Fresh Boneless Korean BBQ or Maple Chipotle Marinated Bottom Sirloin Tri Tip Grilling Steak Cubes,$13.99,lb,"Fresh Boneless Korean BBQ or Maple Chipotle Marinated Bottom Sirloin Tri Tip Grilling Steak Cubes, , $13.99 /lb",flyer-item,807486771,1
+Fresh Boneless Korean BBQ or Maple Chipotle Marinated Bottom Sirloin Tri Tip Grilling Steak Cubes,$13.99,lb,"Fresh Boneless Korean BBQ or Maple Chipotle Marinated Bottom Sirloin Tri Tip Grilling Steak Cubes, , $13.99 /lb",flyer-item,807486771,1
 Soft Drinks,$0.88,1,"Soft Drinks, , $0.88",flyer-item,807486772,1
 Crispy Minis,$2.99,1,"Crispy Minis, , $2.99 EACH WHEN YOU BUY 3 OR MORE.",flyer-item,807486773,1
 COMPLIMENTS Tortilla Chips,$6,2,"COMPLIMENTS Tortilla Chips, , 2/ $6",flyer-item,807486774,1
@@ -165,7 +165,7 @@ Potsticker or Dumplings,$5.98,1,"Potsticker or Dumplings, , $5.98",flyer-item,80
 Mayonnaise,$6.48,1,"Mayonnaise, , $6.48",flyer-item,807486838,1
 BLUE DRAGON Spring Roll Wraps,$3.98,1,"BLUE DRAGON Spring Roll Wraps, , $3.98",flyer-item,807486839,1
 Oyster Sauce,$2.98,1,"Oyster Sauce, , $2.98",flyer-item,807486840,1
-Asian Pear,$1.88,1,"Asian Pear, , $1.88 /lb",flyer-item,807486841,1
+Asian Pear,$1.88,lb,"Asian Pear, , $1.88 /lb",flyer-item,807486841,1
 Pomelo,$2.88,1,"Pomelo, , $2.88",flyer-item,807486842,1
 Shrimp Dim Sum or Crab Rangoon,$8.99,1,"Shrimp Dim Sum or Crab Rangoon, Get 100 Scene+ PTS when you buy 1 or Get 300 Scene+ PTS when you buy 2 or Get 600 Scene+ PTS when you buy 3, $8.99",flyer-item,807486843,1
 BLUE DRAGON Spring Roll Wraps,$3.98,1,"BLUE DRAGON Spring Roll Wraps, , $3.98",flyer-item,807486839,1

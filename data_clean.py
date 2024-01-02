@@ -12,7 +12,7 @@ def parse_sobeys_aria_label(aria_label):
     # Extracting price, which is any dollar amount in the string
     price_matches = re.findall(r'\$\d+(?:\.\d+)?(?: /lb)?', aria_label)
     price = price_matches[0] if price_matches else ''
-    price = re.sub(r' /lb','',price)
+
 
     # Extracting measurement, which could be 'lb' or a number like '3/' indicating quantity
     measurement = '1'  # default value
@@ -22,6 +22,8 @@ def parse_sobeys_aria_label(aria_label):
         quantity_matches = re.findall(r'(\d+)/ \$', aria_label)
         if quantity_matches:
             measurement = quantity_matches[0]
+
+    price = re.sub(r' /lb', '', price) # remove '/lb' from price
 
     # Remark is the entire aria-label
     remark = aria_label.strip()
