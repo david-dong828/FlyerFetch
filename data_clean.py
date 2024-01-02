@@ -30,7 +30,7 @@ def parse_sobeys_aria_label(aria_label):
 
     return name, price, measurement, remark
 
-def clean_sobeys_data(fileName):
+def clean_sobeys_data(fileName,shopName):
     df = pd.read_csv(fileName)
     parsed_aria_label_combined_rest = [(*parse_sobeys_aria_label(label),item_type,item_id,item_type_number)
                          for label,item_type,item_id,item_type_number in
@@ -48,12 +48,12 @@ def clean_sobeys_data(fileName):
     new_file_path = os.path.join(folder_path, newFileName)
 
     new_df.to_csv(new_file_path,index=False)
-    print(f"the sobeys data is Cleaned and Saved as '{newFileName}' in folder '{folder_path}'")
+    print(f"the {shopName} data is Cleaned and Saved as '{newFileName}' in folder '{folder_path}'")
 
 
 
 def main():
-    clean_sobeys_data(r"scraped_draft_data/sobeysFlyer_2024-01-01.csv")
+    clean_sobeys_data(r"scraped_draft_data/sobeysFlyer_2024-01-01.csv","sobeys")
 
 if __name__ == '__main__':
     main()

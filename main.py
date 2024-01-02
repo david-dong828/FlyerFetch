@@ -1,14 +1,18 @@
 # Used to check groceries' flyers
 
-import getSobeysFlyer,data_clean
+import getFlyer_sobeys_walmart,data_clean
 
-def sobeys_flyer(url):
-    draft_flyer_file = getSobeysFlyer.getFlyer(url)
-    data_clean.clean_sobeys_data(draft_flyer_file)
+def sobeys_walmart_flyer(url):
+    draft_flyer_file,shopName = getFlyer_sobeys_walmart.getFlyer(url)
+    if draft_flyer_file == -1:
+        print("error in getting flyer data")
+        return
+    data_clean.clean_sobeys_data(draft_flyer_file,shopName)
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    sobeys_flyer_url = "https://www.sobeys.com/en/flyer/"
-    sobeys_flyer(sobeys_flyer_url)
+    urls = ["https://www.sobeys.com/en/flyer/","https://www.walmart.ca/en/flyer"]
+    for url in urls:
+        sobeys_walmart_flyer(url)
 

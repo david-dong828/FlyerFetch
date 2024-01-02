@@ -10,7 +10,10 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.action_chains import ActionChains
+import random
+from urllib.parse import urlparse
 
 def scroll_within_iframe(driver):
     screen_height = driver.execute_script("return window.screen.height;")
@@ -23,17 +26,62 @@ def scroll_within_iframe(driver):
         if (screen_height * i) > scroll_height:
             break
 
+def getGroceryShopName(url):
+    parsed_url = urlparse(url)
+    return parsed_url.netloc.split(".")[-2]
+
+def saveFile(groceryShop,csvFileName,all_items):
+    folder_path = 'scraped_draft_data'
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path)
+    csvFilePath = os.path.join(folder_path, csvFileName)
+
+    # Save data to CSV after each page
+    pd.DataFrame(all_items).to_csv(csvFilePath, index=False)
+    print(f"the {groceryShop} flyer data is Scraped and Saved as '{csvFileName}' in folder '{folder_path}'")
+    return csvFilePath
+
 def getFlyer(url):
     today_date = datetime.now().strftime("%Y-%m-%d")
-    csvFileName = "sobeysFlyer"+"_"+today_date+".csv"
+    groceryShop = getGroceryShopName(url)
 
     # Set up Chrome options for Selenium
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    options = Options()
+    options.add_argument("--start-maximized")
+    options.add_argument("--disable-blink-features=AutomationControlled")
+    options.add_argument(
+        "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36")
+    options.add_argument("--headless")
+
+    groceryData = {
+        "sobeys":
+            {
+                "csvFileName": "sobeysFlyer"+"_"+today_date+".csv",
+                "iframeParentSelector":"#circ_div > main",
+                "driver": webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+            },
+        "walmart":
+            {
+                "csvFileName": "walmartFlyer" + "_" + today_date + ".csv",
+                "iframeParentSelector": "#flipp-flyer2-container > main",
+                "driver": webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()),options=options)
+            }
+    }
+
+    # get Selenium
+    driver = groceryData[groceryShop]["driver"]
 
     # List all items from the flyer
     all_items = []
 
     driver.get(url)
+
+    # Random delay
+    time.sleep(random.uniform(1, 3))
+    # Simulate human-like mouse movements
+    action = ActionChains(driver)
+    action.move_to_element(driver.find_element(By.TAG_NAME, 'body')).perform()
+    action.move_by_offset(random.randint(10, 100), random.randint(10, 100)).perform()
 
     # Wait for the page to load completely
     wait = WebDriverWait(driver, 30)
@@ -42,7 +90,8 @@ def getFlyer(url):
     # Attempt to find the iframe
     try:
         # Locate the parent element <DONT try to locate the iframe directly>
-        parent_element = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "#circ_div > main")))
+        parent_element = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, groceryData[groceryShop]["iframeParentSelector"])))
+
         # Find the iframe within the parent element
         iframe = parent_element.find_element(By.TAG_NAME, "iframe")
         driver.switch_to.frame(iframe)
@@ -69,15 +118,9 @@ def getFlyer(url):
                 }
                 all_items.append(item_data)
 
-        folder_path = 'scraped_draft_data'
-        if not os.path.exists(folder_path):
-            os.makedirs(folder_path)
-        csvFilePath = os.path.join(folder_path, csvFileName)
-
-        # Save data to CSV after each page
-        pd.DataFrame(all_items).to_csv(csvFilePath, index=False)
-        print(f"the sobeys flyer data is Scraped and Saved as '{csvFileName}' in folder '{folder_path}'")
-        return csvFilePath
+        csvFileName = groceryData[groceryShop]["csvFileName"]
+        csvFilePath = saveFile(groceryShop, csvFileName, all_items)
+        return csvFilePath,groceryShop
 
         '''
         # this can be used to locate the button which contains "data-product-id"
@@ -98,10 +141,10 @@ def getFlyer(url):
     except TimeoutException:
         print("Timed out waiting for page to load")
         driver.save_screenshot('debug_screenshot_after_timeout.png')
-        return -1
+        return -1,-1
     except NoSuchElementException:
         print("Could not find the iframe or elements within it.")
-        return -1
+        return -1,-1
     finally:
         driver.quit()
 
@@ -119,7 +162,10 @@ def getFlyer(url):
 
 def main():
     sobeys_url = "https://www.sobeys.com/en/flyer/"
-    sobeysItemSavedFile = getFlyer(sobeys_url)
+    sobeysItemSavedFile,shopName = getFlyer(sobeys_url)
+
+    # walmart_url = "https://www.walmart.ca/en/flyer"
+    # walmartFlyer,shopName = getFlyer(walmart_url)
 
 if __name__ == '__main__':
     main()
