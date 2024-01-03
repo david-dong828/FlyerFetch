@@ -41,6 +41,12 @@ def preprocess_data(grocery_dataset):
     df['category'] = df['category'].apply(lambda x: x[0] if isinstance(x, list) else x)
 
     return df
+def preprocess_csvdata(grocery_dataset):
+    df = pd.read_csv("grocery_dataset.csv")
+
+    # Preprocess the text data
+    df["Processed_Name"] = df["Name"].apply(preprocess_text)
+    return df
 
 def save_model(model):
     dump(model,"grocery_classify_model.joblib")
@@ -48,21 +54,21 @@ def save_model(model):
 def grocery_class_model(df):
     # Splitting the dataset
     X_train, X_test, y_train, y_test = train_test_split(
-        df['Processed_Name'], df['category'], test_size=0.33)
+        df['Processed_Name'], df['Category'], test_size=0.33)
 
     # TF-IDF Vectorizer and Naive Bayes Classifier
     model = make_pipeline(TfidfVectorizer(), MultinomialNB())
 
     # param grid
     param_grid = {
-        "tfidfvectorizer__max_df":[0.5, 0.75, 0.95],
-        "tfidfvectorizer__min_df":[0.01, 0.05, 0.1],
-        "tfidfvectorizer__ngram_range":[(1, 1), (1, 2),(1,3)],
-        "multinomialnb__alpha":[0.01, 0.1, 1]
+        "tfidfvectorizer__max_df":[0.75, 0.85, 0.95],
+        "tfidfvectorizer__min_df":[0.01, 0.02],
+        "tfidfvectorizer__ngram_range":[(1, 1), (1, 2)],
+        "multinomialnb__alpha":[0.01, 0.1, 1.0]
     }
 
     # gridsearchcv trainning
-    grid_search = GridSearchCV(model, param_grid, cv=5, scoring='accuracy')
+    grid_search = GridSearchCV(model, param_grid, cv=10, scoring='f1_macro',error_score='raise')
     grid_search.fit(X_train, y_train)
 
     # Best param and model
@@ -76,8 +82,11 @@ def grocery_class_model(df):
     print(classification_report(y_test, y_pred,zero_division=0))
 
 def main():
-    grocery_dataset = "grocery_data.json"
-    df = preprocess_data(grocery_dataset)
+    # grocery_dataset = "grocery_data.json"
+    # df = preprocess_data(grocery_dataset)
+
+    grocery_dataset = "grocery_dataset.csv"
+    df = preprocess_csvdata(grocery_dataset)
     grocery_class_model(df)
 
 if __name__ == '__main__':

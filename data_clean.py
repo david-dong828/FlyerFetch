@@ -6,6 +6,7 @@
 import pandas as pd
 import re,os
 from datetime import datetime
+from grocery_model import use_model
 
 def parse_aria_label(aria_label):
     # Extracting name, which is before the first comma
@@ -51,11 +52,14 @@ def clean_data(fileName,shopName):
                          zip(df["aria-label"],df["item-type"],df["item-id"],df["item-type-number"])
                          if parse_aria_label(label)[1]] # to check if price is none
     new_df = pd.DataFrame(parsed_aria_label_combined_rest,
-                             columns=["name", "price", "measurement", "remark","item-type","item-id","item-type-number"])
+                             columns=["Item_Name", "Price", "UoM", "remark","item-type","item-id","item-type-number"])
 
-
+    new_df = new_df.drop_duplicates(subset=["Item_Name","Price"])
 
     new_df.to_csv(new_file_path,index=False)
+
+    use_model.classify_grocery_data(new_file_path) # add a category n save back
+
     print(f"the {shopName} data is Cleaned and Saved as '{newFileName}' in folder '{folder_path}'")
     return new_file_path
 
@@ -71,8 +75,8 @@ def combine_data(file1,file2):
     if os.path.exists(filePath):
         return filePath
 
-    df1 = pd.read_csv(file1,usecols=[0,1,2])
-    df2 = pd.read_csv(file2,usecols=[0,1,2])
+    df1 = pd.read_csv(file1,usecols=[0,1,2,8])
+    df2 = pd.read_csv(file2,usecols=[0,1,2,8])
 
     # Add a header row for labeling
     df1.columns = ["Sobeys_" + str(col) for col in df1.columns]
@@ -86,12 +90,12 @@ def combine_data(file1,file2):
     return filePath
 
 def main():
-    # clean_data(r"scraped_draft_data/sobeysFlyer_2024-01-02.csv","sobeys")
-    dataFile1 = "cleaned_data/cleaned_sobeysFlyer_2024-01-02.csv"
-    dataFile2 = "cleaned_data/cleaned_walmartFlyer_2024-01-02.csv"
-
-    f = combine_data(dataFile1, dataFile2)
-    print(f)
+    clean_data(r"scraped_draft_data/walmartFlyer_2024-01-03.csv","sobeys")
+    # dataFile1 = "cleaned_data/cleaned_sobeysFlyer_2024-01-02.csv"
+    # dataFile2 = "cleaned_data/cleaned_walmartFlyer_2024-01-02.csv"
+    #
+    # f = combine_data(dataFile1, dataFile2)
+    # print(f)
 
 if __name__ == '__main__':
     main()

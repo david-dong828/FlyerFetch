@@ -29,7 +29,7 @@
         </p>
         <div class="d-grid gap-2 d-md-flex justify-content-md-start">
           <button type="button" id="fetchFlyersButton" class="btn btn-primary btn-lg px-4 me-md-2">Fetch Flyers</button>
-          <button type="button" class="btn btn-outline-secondary btn-lg px-4">Smart Shopper</button>
+          <button type="button" id="fetchRecommendationsButton" class="btn btn-outline-secondary btn-lg px-4">Smart Shopper</button>
         </div>
       </div>
     </div>
@@ -108,8 +108,14 @@
           </div>
           <div class="modal-body">
             <!-- CSV data will be loaded here -->
-            <div id="csvData" style="overflow-y: auto; max-height: 400px;">
+            <div id="sobeysData" style="overflow-y: auto; max-height: 400px;">
+<!--            <div id="csvData" style="overflow-y: auto; max-height: 400px;">-->
               <!-- CSV data goes here -->
+            </div>
+            <hr> <!-- This line provides a visual separation between the two tables -->
+            <hr>
+            <div id="walmartData" style="overflow-y: auto; max-height: 400px;">
+              <!-- Walmart CSV data goes here -->
             </div>
           </div>
           <div class="modal-footer">
@@ -121,14 +127,27 @@
 
   <script>
   document.getElementById('fetchFlyersButton').addEventListener('click', function() {
+    document.getElementById('sobeysData').innerHTML = ""; // clean first then fetch new
+    document.getElementById('walmartData').innerHTML = ""; // clean first then fetch new
+
     fetch('/flyers')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('csvData').innerText = data;
+      .then(response => response.json())
+      .then(data  => {
+        document.getElementById('sobeysData').innerHTML = data.sobeys;
+        document.getElementById('walmartData').innerHTML = data.walmart;
+
         var csvModal = new bootstrap.Modal(document.getElementById('csvModal'));
         csvModal.show();
-        });
+        })
+      .catch(error => console.error('Error:', error));
     });
+
+  document.getElementById('fetchRecommendationsButton').addEventListener('click', function (){
+
+      fetch('/recommendations')
+      .then(response => response.json())
+      .then()
+  });
   </script>
 
 </body>
