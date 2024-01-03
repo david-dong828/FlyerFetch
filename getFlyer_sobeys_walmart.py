@@ -30,20 +30,42 @@ def getGroceryShopName(url):
     parsed_url = urlparse(url)
     return parsed_url.netloc.split(".")[-2]
 
-def saveFile(groceryShop,csvFileName,all_items):
-    folder_path = 'scraped_draft_data'
-    if not os.path.exists(folder_path):
-        os.makedirs(folder_path)
-    csvFilePath = os.path.join(folder_path, csvFileName)
-
-    # Save data to CSV after each page
-    pd.DataFrame(all_items).to_csv(csvFilePath, index=False)
-    print(f"the {groceryShop} flyer data is Scraped and Saved as '{csvFileName}' in folder '{folder_path}'")
-    return csvFilePath
+# def saveFile(groceryShop,csvFileName,all_items):
+#     folder_path = 'scraped_draft_data'
+#     if not os.path.exists(folder_path):
+#         os.makedirs(folder_path)
+#     csvFilePath = os.path.join(folder_path, csvFileName)
+#
+#     # Save data to CSV after each page
+#     pd.DataFrame(all_items).to_csv(csvFilePath, index=False)
+#     print(f"the {groceryShop} flyer data is Scraped and Saved as '{csvFileName}' in folder '{folder_path}'")
+#     return csvFilePath
 
 def getFlyer(url):
     today_date = datetime.now().strftime("%Y-%m-%d")
     groceryShop = getGroceryShopName(url)
+
+    groceryData = {
+        "sobeys":
+            {
+                "csvFileName": "sobeysFlyer" + "_" + today_date + ".csv",
+                "iframeParentSelector": "#circ_div > main",
+            },
+        "walmart":
+            {
+                "csvFileName": "walmartFlyer" + "_" + today_date + ".csv",
+                "iframeParentSelector": "#flipp-flyer2-container > main",
+            }
+    }
+
+    # check if the file already exists
+    csvFileName = groceryData[groceryShop]["csvFileName"]
+    folder_path = 'scraped_draft_data'
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path)
+    csvFilePath = os.path.join(folder_path, csvFileName)
+    if os.path.exists(csvFilePath):
+        return csvFilePath, groceryShop
 
     # Set up Chrome options for Selenium
     options = Options()
@@ -53,20 +75,9 @@ def getFlyer(url):
         "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36")
     options.add_argument("--headless")
 
-    groceryData = {
-        "sobeys":
-            {
-                "csvFileName": "sobeysFlyer"+"_"+today_date+".csv",
-                "iframeParentSelector":"#circ_div > main",
-                "driver": webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-            },
-        "walmart":
-            {
-                "csvFileName": "walmartFlyer" + "_" + today_date + ".csv",
-                "iframeParentSelector": "#flipp-flyer2-container > main",
-                "driver": webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()),options=options)
-            }
-    }
+    # add driver into data for each grocery
+    groceryData["sobeys"]["driver"] = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    groceryData["walmart"]["driver"] = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()),options=options)
 
     # get Selenium
     driver = groceryData[groceryShop]["driver"]
@@ -117,9 +128,8 @@ def getFlyer(url):
                 }
                 all_items.append(item_data)
 
-        # Save to csv file
-        csvFileName = groceryData[groceryShop]["csvFileName"]
-        csvFilePath = saveFile(groceryShop, csvFileName, all_items)
+        # Save data to CSV
+        pd.DataFrame(all_items).to_csv(csvFilePath, index=False)
         return csvFilePath,groceryShop
 
         '''
@@ -161,11 +171,13 @@ def getFlyer(url):
     '''
 
 def main():
-    sobeys_url = "https://www.sobeys.com/en/flyer/"
-    sobeysItemSavedFile,shopName = getFlyer(sobeys_url)
+    # sobeys_url = "https://www.sobeys.com/en/flyer/"
+    # sobeysItemSavedFile,shopName = getFlyer(sobeys_url)
+    # print(sobeysItemSavedFile,shopName)
 
-    # walmart_url = "https://www.walmart.ca/en/flyer"
-    # walmartFlyer,shopName = getFlyer(walmart_url)
+    walmart_url = "https://www.walmart.ca/en/flyer"
+    walmartFlyer,shopName = getFlyer(walmart_url)
+    print(walmartFlyer, shopName)
 
 if __name__ == '__main__':
     main()
