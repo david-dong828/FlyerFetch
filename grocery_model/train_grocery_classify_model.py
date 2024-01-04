@@ -19,6 +19,14 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
 def preprocess_text(text):
+    # Check if a str
+    if not isinstance(text, str):
+        # If it's NaN replace with an empty string
+        if pd.isna(text):
+            text = ''
+        else:
+            # Convert non-string text to string
+            text = str(text)
     tokens = word_tokenize(text.lower())
     tokens = [word for word in tokens if word not in stopwords.words('english')]
     return ' '.join(tokens)
@@ -41,11 +49,12 @@ def preprocess_data(grocery_dataset):
     df['category'] = df['category'].apply(lambda x: x[0] if isinstance(x, list) else x)
 
     return df
+
 def preprocess_csvdata(grocery_dataset):
-    df = pd.read_csv("grocery_dataset.csv")
+    df = pd.read_csv(grocery_dataset)
 
     # Preprocess the text data
-    df["Processed_Name"] = df["Name"].apply(preprocess_text)
+    df["Processed_Name"] = df["product"].apply(preprocess_text)
     return df
 
 def save_model(model):
@@ -54,7 +63,7 @@ def save_model(model):
 def grocery_class_model(df):
     # Splitting the dataset
     X_train, X_test, y_train, y_test = train_test_split(
-        df['Processed_Name'], df['Category'], test_size=0.33)
+        df['Processed_Name'], df['category'], test_size=0.2)
 
     # TF-IDF Vectorizer and Naive Bayes Classifier
     model = make_pipeline(TfidfVectorizer(), MultinomialNB())
@@ -68,7 +77,7 @@ def grocery_class_model(df):
     }
 
     # gridsearchcv trainning
-    grid_search = GridSearchCV(model, param_grid, cv=10, scoring='f1_macro',error_score='raise')
+    grid_search = GridSearchCV(model, param_grid, cv=15, scoring='accuracy',error_score='raise')
     grid_search.fit(X_train, y_train)
 
     # Best param and model
@@ -85,7 +94,7 @@ def main():
     # grocery_dataset = "grocery_data.json"
     # df = preprocess_data(grocery_dataset)
 
-    grocery_dataset = "grocery_dataset.csv"
+    grocery_dataset = "BigBasket_Products.csv"
     df = preprocess_csvdata(grocery_dataset)
     grocery_class_model(df)
 

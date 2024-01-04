@@ -10,7 +10,27 @@
     integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/style.css">
     <style>
-
+      .modal-header, .modal-footer {
+          background-color: #f8f9fa; /* Light grey background */
+          border-bottom: 1px solid #dee2e6; /* Add a border to the header */
+      }
+      .modal-title {
+          color: #007bff; /* Bootstrap primary color for the title */
+      }
+      .modal-body {
+          padding: 20px;
+      }
+      .recommendation-card {
+          background-color: #fff;
+          border: 1px solid #dee2e6;
+          border-radius: 5px;
+          padding: 10px;
+          margin-bottom: 10px;
+          transition: box-shadow 0.3s;
+      }
+      .recommendation-card:hover {
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
     </style>
 </head>
 <body>
@@ -125,6 +145,37 @@
       </div>
     </div>
 
+    <!-- Recommendations Modal -->
+    <div class="modal fade" id="recommendationsModal" tabindex="-1" aria-labelledby="recommendationsModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-center" id="recommendationsModalLabel">Grocery Recommendations</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  <h6 class="text-center">Sobeys</h6>
+                  <!-- Recommendations for Sobeys go here -->
+                  <div id="sobeysRecommendations" class="recommendation-container"></div>
+                </div>
+                <div class="col">
+                  <h6 class="text-center">Walmart</h6>
+                  <!-- Recommendations for Walmart go here -->
+                  <div id="walmartRecommendations" class="recommendation-container"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   <script>
   document.getElementById('fetchFlyersButton').addEventListener('click', function() {
     document.getElementById('sobeysData').innerHTML = ""; // clean first then fetch new
@@ -146,8 +197,41 @@
 
       fetch('/recommendations')
       .then(response => response.json())
-      .then()
+      .then(data => {
+        const sobeysRecs = data.sobeys.slice(0,15);
+        const walmartRecs = data.walmart.slice(0,15);
+
+        document.getElementById("sobeysRecommendations").innerHTML = generateListHTML(sobeysRecs);
+        document.getElementById("walmartRecommendations").innerHTML = generateListHTML(walmartRecs);
+
+        var recommendationsModal = new bootstrap.Modal(document.getElementById("recommendationsModal"));
+        recommendationsModal.show();
+      })
+        .catch(error => console.error("Error: ",error));
   });
+
+  function generateListHTML(items) {
+    let table = '<table class="table">';
+    // Add table header
+    table += `<thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>UoM</th>
+                </tr>
+              </thead>`;
+    // Add table body
+    table += '<tbody>';
+    items.forEach(item => {
+      table += `<tr>
+                  <td>${item.name}</td>
+                  <td>$${item.price}</td>
+                  <td>${item.uom}</td>
+                </tr>`;
+    });
+    table += '</tbody></table>';
+    return table;
+  }
   </script>
 
 </body>

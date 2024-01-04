@@ -1,0 +1,42 @@
+{
+    "maple leaf pork tenderloin": {
+        "Item_Name": "Maple Leaf Pork Tenderloin",
+        "Price": "$9.97",
+        "UoM": 1
+    },
+    "deli express chicken wings": {
+        "Item_Name": "Deli Express Chicken Wings",
+        "Price": "$5.97",
+        "UoM": 1
+    },
+    "great value breaded chicken strips": {
+        "Item_Name": "Great Value Breaded Chicken Strips",
+        "Price": "$9.77",
+        "UoM": 1
+    },
+    "avocados": {
+        "Item_Name": "Avocados",
+        "Price": "$5.97",
+        "UoM": 1
+    },
+    "bulk honeycrisp apples": {
+        "Item_Name": "Bulk Honeycrisp Apples",
+        "Price": "$3.97",
+        "UoM": 1
+    },
+    "wonder bread": {
+        "Item_Name": "Wonder Bread",
+        "Price": "$6",
+        "UoM": 1
+    },
+    "ben's holsum fresh bread": {
+        "Item_Name": "Ben's Holsum Fresh Bread",
+        "Price": "$6",
+        "UoM": 1
+    },
+    "activia tubs 650 g or two good 4 x 95 g yogurt": {
+        "Item_Name": "Activia Tubs 650 g or Two Good 4 x 95 g Yogurt",
+        "Price": "$10",
+        "UoM": 1
+    }
+}

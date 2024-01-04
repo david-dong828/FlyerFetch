@@ -2,10 +2,10 @@
 import csv,os
 
 from flask import Flask,request,render_template,jsonify,Response
-from markupsafe import Markup
 import getFlyer_sobeys_walmart,data_clean
+from grocery_model import train_recomdation_model
 from itertools import groupby
-
+import json
 from datetime import datetime
 
 app = Flask(__name__,static_folder='assets')
@@ -28,41 +28,6 @@ def generate_html_table(data, headers):
             table += "<tr><td>" + "</td><td>".join(row[header] for header in headers) + "</td></tr>"
     table += "</tbody></table>"
     return table
-
-# def read_csv(filePath):
-#     with open(filePath, 'r', newline='',encoding="utf-8") as file:
-#         reader = csv.DictReader(file)
-#         sorted_list = sorted(reader, key=lambda x: (x['Sobeys_category'], x['Walmart_category']))
-#         headers = [header for header in sorted_list[0].keys() if header not in ['Sobeys_category', 'Walmart_category']]
-#
-#         table = "<table class='table'>"
-#         table += "<thread><tr><th>" + "</th><th>".join(headers) + "</th></tr></thead>"
-#         table += "<tbody>"
-#
-#         current_sobeys_category = None
-#         current_walmart_category = None
-#         for r in sorted_list:
-#             if current_sobeys_category != r["Sobeys_category"]:
-#                 current_sobeys_category = r["Sobeys_category"]
-#                 table += f"<tr><td colspan='4'><strong>{current_sobeys_category}</strong></td></tr>"
-#
-#             if current_walmart_category != r['Walmart_category']:
-#                 current_walmart_category = r['Walmart_category']
-#                 # Fill the first 4 columns if there's no change in Sobeys category to maintain the table structure
-#                 if current_sobeys_category == r['Sobeys_category']:
-#                     table += f"<tr><td colspan='4'></td><td colspan='4'><strong>{current_walmart_category}</strong></td></tr>"
-#                 else:
-#                     table += f"<tr><td colspan='4'><strong>{current_walmart_category}</strong></td></tr>"
-#
-#             # Add the data rows
-#             table += "<tr>"
-#             for header in headers:
-#                 if not header.endswith("_category"):  # exclude category columns from normal rows
-#                     table += f"<td>{r[header]}</td>"
-#             table += "</tr>"
-#
-#         table += "</tbody></table>"
-#         return Markup(table)
 
 def read_csv(filePath):
     with open(filePath, 'r', newline='', encoding="utf-8") as file:
@@ -114,6 +79,9 @@ def showFlyers():
 
         data_clean.combine_data(cleanedFilesPaths[0],cleanedFilesPaths[1])
 
+        train_recomdation_model.get_recommendation_simple(cleanedFilesPaths[0]) # get sobeys/ walmart recomemndations
+        train_recomdation_model.get_recommendation_simple(cleanedFilesPaths[1]) # so no need to run in showRecommendations()
+
     print(f"done {filePath}")
     sobeys_table, walmart_table = read_csv(filePath)
 
@@ -121,13 +89,55 @@ def showFlyers():
 
 @app.route("/recommendations",methods=['GET'])
 def showRecommendations():
-    pass
+    folder_path = 'recommendation'
+    fileName1 = "walmart_recommendations_" + datetime.now().strftime("%Y-%m-%d") + ".json"
+    filePath1 = os.path.join(folder_path, fileName1)
+    fileName2 = "sobeys_recommendations_" + datetime.now().strftime("%Y-%m-%d") + ".json"
+    filePath2 = os.path.join(folder_path, fileName2)
+
+    walmart_recommendations = []
+    sobeys_recommendations = []
+
+    # Load Walmart recommendations if file exists
+    if os.path.exists(filePath1):
+        try:
+            with open(filePath1, 'r', encoding='utf-8') as file:
+                walmart_json = json.load(file)
+                for key,items in walmart_json.items():
+                    print(items)
+                    new_item = {
+                        'name': items['Item_Name'],
+                        'price': float(items['Price'].replace('$', '')),  # Convert price to float and remove '$'
+                        'uom': items['UoM']
+                    }
+                    walmart_recommendations.append(new_item)
+            print(walmart_recommendations)
+        except json.JSONDecodeError:
+            print(f"Error reading {filePath1}")
+
+    # Load Sobeys recommendations if file exists
+    if os.path.exists(filePath2):
+        try:
+            with open(filePath2, 'r', encoding='utf-8') as file:
+                sobeys_json = json.load(file)
+                for key,items in sobeys_json.items():
+                    new_item = {
+                        'name': items['Item_Name'],
+                        'price': float(items['Price'].replace('$', '')),  # Convert price to float and remove '$'
+                        'uom': items['UoM']
+                    }
+                    sobeys_recommendations.append(new_item)
+        except json.JSONDecodeError:
+            print(f"Error reading {filePath2}")
+
+    return jsonify(sobeys=sobeys_recommendations, walmart=walmart_recommendations)
 
 def main():
     # urls = ["https://www.sobeys.com/en/flyer/", "https://www.walmart.ca/en/flyer"]
     # for url in urls:
     #     sobeys_walmart_flyer(url)
-    showFlyers()
+    # showFlyers()
+    showRecommendations()
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':

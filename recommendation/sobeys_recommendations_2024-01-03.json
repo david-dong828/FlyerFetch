@@ -1,0 +1,107 @@
+{
+    "almond beverages": {
+        "Item_Name": "Almond Beverages",
+        "Price": "$2.88",
+        "UoM": "1"
+    },
+    "snacking crackers": {
+        "Item_Name": "Snacking Crackers",
+        "Price": "$6.99",
+        "UoM": "3"
+    },
+    "in-store ground beef meatballs or meatloaf": {
+        "Item_Name": "In-Store Ground Beef Meatballs or Meatloaf",
+        "Price": "$6.49",
+        "UoM": "lb"
+    },
+    "made sausage stuffed mushroom caps or ground beef stuffed peppers": {
+        "Item_Name": "Made Sausage Stuffed Mushroom Caps or Ground Beef Stuffed Peppers",
+        "Price": "$10",
+        "UoM": "1"
+    },
+    "fresh pork loin back ribs": {
+        "Item_Name": "Fresh Pork Loin Back Ribs",
+        "Price": "$3.99",
+        "UoM": "lb"
+    },
+    "compliments or panache pork back ribs": {
+        "Item_Name": "COMPLIMENTS or PANACHE Pork Back Ribs",
+        "Price": "$5.99",
+        "UoM": "1"
+    },
+    "seasoned split chicken wings": {
+        "Item_Name": "Seasoned Split Chicken Wings",
+        "Price": "$4.99",
+        "UoM": "lb"
+    },
+    "flattened chicken": {
+        "Item_Name": "Flattened Chicken",
+        "Price": "$5.99",
+        "UoM": "lb"
+    },
+    "coho salmon fillets": {
+        "Item_Name": "Coho Salmon Fillets",
+        "Price": "$11.99",
+        "UoM": "lb"
+    },
+    "compliments or panache smoked atlantic salmon": {
+        "Item_Name": "COMPLIMENTS or PANACHE Smoked Atlantic Salmon",
+        "Price": "$9.99",
+        "UoM": "1"
+    },
+    "compliments free run large white eggs": {
+        "Item_Name": "COMPLIMENTS Free Run Large White Eggs",
+        "Price": "$5.99",
+        "UoM": "1"
+    },
+    "large avocados or large red mangoes": {
+        "Item_Name": "Large Avocados or Large Red Mangoes",
+        "Price": "$4.98",
+        "UoM": "3"
+    },
+    "large avocados": {
+        "Item_Name": "Large Avocados",
+        "Price": "$4.98",
+        "UoM": "3"
+    },
+    "large pineapples whole or cored": {
+        "Item_Name": "Large Pineapples whole or cored",
+        "Price": "$6.49",
+        "UoM": "1"
+    },
+    "cosmic crisp apples": {
+        "Item_Name": "Cosmic Crisp Apples",
+        "Price": "$2.99",
+        "UoM": "lb"
+    },
+    "whole grain bread": {
+        "Item_Name": "Whole Grain Bread",
+        "Price": "$7",
+        "UoM": "2"
+    },
+    "compliments breaded chicken balls with sweet & sour sauce or frozen breaded chicken burgers": {
+        "Item_Name": "COMPLIMENTS Breaded Chicken Balls with Sweet & Sour Sauce or Frozen Breaded Chicken Burgers",
+        "Price": "$8.99",
+        "UoM": "1"
+    },
+    "source yogurt": {
+        "Item_Name": "Source Yogurt",
+        "Price": "$3.49",
+        "UoM": "1"
+    },
+    "olympic organic yogurt": {
+        "Item_Name": "OLYMPIC ORGANIC Yogurt",
+        "Price": "$10.99",
+        "UoM": "1"
+    },
+    "potato chips": {
+        "Item_Name": "Potato Chips",
+        "Price": "$7",
+        "UoM": "2"
+    },
+    "tortilla chips": {
+        "Item_Name": "Tortilla Chips",
+        "Price": "$9",
+        "UoM": "2"
+    }
+}

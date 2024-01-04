@@ -30,17 +30,6 @@ def getGroceryShopName(url):
     parsed_url = urlparse(url)
     return parsed_url.netloc.split(".")[-2]
 
-# def saveFile(groceryShop,csvFileName,all_items):
-#     folder_path = 'scraped_draft_data'
-#     if not os.path.exists(folder_path):
-#         os.makedirs(folder_path)
-#     csvFilePath = os.path.join(folder_path, csvFileName)
-#
-#     # Save data to CSV after each page
-#     pd.DataFrame(all_items).to_csv(csvFilePath, index=False)
-#     print(f"the {groceryShop} flyer data is Scraped and Saved as '{csvFileName}' in folder '{folder_path}'")
-#     return csvFilePath
-
 def getFlyer(url):
     today_date = datetime.now().strftime("%Y-%m-%d")
     groceryShop = getGroceryShopName(url)
