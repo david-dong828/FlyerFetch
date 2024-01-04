@@ -55,7 +55,7 @@ def get_recommendation_simple(flyerData):
         df = pd.read_csv(flyerData)
 
         # find hot price items
-        hot_price_items = df[df["remark"].str.contains("HOT PRICE",na=False)]
+        hot_price_items = df[df["remark"].str.contains("HOT PRICE|Save",na=False)]
         for _, row in hot_price_items.iterrows():
             item_key = row['Item_Name'].lower()  #use low case for avoiding duplication
             if item_key not in recommendations:

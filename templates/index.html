@@ -198,8 +198,8 @@
       fetch('/recommendations')
       .then(response => response.json())
       .then(data => {
-        const sobeysRecs = data.sobeys.slice(0,15);
-        const walmartRecs = data.walmart.slice(0,15);
+        const sobeysRecs = data.sobeys.slice(0,12);
+        const walmartRecs = data.walmart.slice(0,12);
 
         document.getElementById("sobeysRecommendations").innerHTML = generateListHTML(sobeysRecs);
         document.getElementById("walmartRecommendations").innerHTML = generateListHTML(walmartRecs);

@@ -14,9 +14,10 @@ def parse_aria_label(aria_label):
 
     # Extracting price, which is any dollar amount in the string
     price_matches = re.findall(r'\$\d+(?:\.\d+)?(?: /lb)?', aria_label)
-    price = price_matches[0] if price_matches else ''
-
-
+    price = price_matches[0] if price_matches and "$" not in name else ''
+    if "Save" in aria_label and len(price_matches) > 1:
+        price = price_matches[1]
+    # print(price,name)
     # Extracting measurement, which could be 'lb' or a number like '3/' indicating quantity
     measurement = '1'  # default value
     if '/lb' in price:
@@ -90,12 +91,15 @@ def combine_data(file1,file2):
     return filePath
 
 def main():
-    clean_data(r"scraped_draft_data/walmartFlyer_2024-01-03.csv","sobeys")
+    # clean_data(r"scraped_draft_data/walmartFlyer_2024-01-03.csv","sobeys")
     # dataFile1 = "cleaned_data/cleaned_sobeysFlyer_2024-01-02.csv"
     # dataFile2 = "cleaned_data/cleaned_walmartFlyer_2024-01-02.csv"
     #
     # f = combine_data(dataFile1, dataFile2)
     # print(f)
+
+    t = "Save $60, ,"
+    parse_aria_label(t)
 
 if __name__ == '__main__':
     main()
