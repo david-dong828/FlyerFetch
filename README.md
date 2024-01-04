@@ -1,34 +1,53 @@
-# Grocery Flyer Converter
+# FlyerFetch Application
 
-**Purpose:** To Convert the Flyer into a readable file, like csv right now
+**Introduction** 
+
+FlyerFetch is an innovative application designed to save time and enhance the shopping experience for users who frequently consult store flyers. Traditional flyers are often cumbersome and time-consuming to go through. FlyerFetch addresses this issue by digitizing flyer data and offering personalized recommendations.
+
+------
+**Purpose**
+
+- **Time Efficiency**: Reduces the time spent reading through traditional paper flyers.
+- **Convenience**: Presents flyer information in a concise, digital format.
+- **Personalized Recommendations**: Utilizes NLP and machine learning to offer tailored shopping suggestions.
 
 ------
 
-> **Manual**
+> **Technology Stack**
 
-- RUN  > **main.py**
+- **Framework**: Flask (Python-based web framework)
+- **Data Scraping**: Selenium for automated flyer data extraction from various sources.
+- **Data Processing**: Python scripts for cleaning and organizing flyer data.
+- **Recommendation Engine**: Utilizes NLP and combined algorithms for generating personalized recommendations.
+- 
+----
+> **Process**
+- **Data Scraping**: Automated scripts use Selenium to scrape flyer data from designated sources.
+- **Data Cleaning**: Extract and clean data to remove duplicates and irrelevant information. Key details such as item name, price, and unit of measurement are retained.
+- **Recommendation Calculation**: Apply NLP techniques and custom algorithms to analyze the data and compute personalized recommendations.
+- **Server**: Flask server hosts the application, providing a user interface for interaction.
 
-- The scraped draft data will be saved into **/scraped_draft_data** folder
+-----
 
-- The Converted and Cleaned data will be saved into **/cleaned_data** folder
+> **Running the Application**
+- **Initial Setup**: Ensure Python and required packages (Flask, Selenium, etc.) are installed.
+- **Start the Application**: Run main.py to start the Flask server.
+- **Access the Web Interface**: Open a web browser and navigate to the local server address (typically localhost with a designated port).
+  - **First-Time Use**: The initial run may take longer due to the absence of a local data cache. The application will scrape and process data during this time.
+  - **Subsequent Use**: Data processing is faster after the initial setup, as the application utilizes locally cached data. 
 
 ------
 
 > **Result**
 
-- Sobeys Flyer looks like
 
-- <img src="https://github.com/david-dong828/groceryFlyers/assets/106771290/28617a85-dc58-492a-87a8-cf6dec040725" width="450" height="380">
-
-- The Clean Converted data looks like:
-
-- <img src="https://github.com/david-dong828/groceryFlyers/assets/106771290/ee151d6b-b6c9-4ea0-b6b7-4ae54e41e766" width="550" height="380">
+https://github.com/david-dong828/FlyerFetch/assets/106771290/5b659e0b-da0b-433c-a3d0-f97346725656
 
 ------
 
 > **NEXT UPDATE**
 
-- Classify the items
+- Upgrade the Classification model
 
-- Give the recommendation
+- Add more groceries
 
