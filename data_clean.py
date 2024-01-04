@@ -18,6 +18,7 @@ def parse_aria_label(aria_label):
     if "Save" in aria_label and len(price_matches) > 1:
         price = price_matches[1]
     # print(price,name)
+
     # Extracting measurement, which could be 'lb' or a number like '3/' indicating quantity
     measurement = '1'  # default value
     if '/lb' in price:
