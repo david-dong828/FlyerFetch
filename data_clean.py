@@ -6,7 +6,7 @@
 import pandas as pd
 import re,os
 from datetime import datetime
-from grocery_model import use_model
+from grocery_model import use_model,useBiLSTMmodel
 
 def parse_aria_label(aria_label):
     # Extracting name, which is before the first comma
@@ -60,7 +60,9 @@ def clean_data(fileName,shopName):
 
     new_df.to_csv(new_file_path,index=False)
 
-    use_model.classify_grocery_data(new_file_path) # add a category n save back
+    # use_model.classify_grocery_data(new_file_path) # add a category n save back ,use TfidfVectorizer model
+
+    useBiLSTMmodel.add_predicted_categories(new_file_path) # Use trained BiLSTMwXLMRModle instead of TfidfVectorizer model
 
     print(f"the {shopName} data is Cleaned and Saved as '{newFileName}' in folder '{folder_path}'")
     return new_file_path
@@ -77,8 +79,8 @@ def combine_data(file1,file2):
     if os.path.exists(filePath):
         return filePath
 
-    df1 = pd.read_csv(file1,usecols=[0,1,2,8])
-    df2 = pd.read_csv(file2,usecols=[0,1,2,8])
+    df1 = pd.read_csv(file1,usecols=[0,1,2,7])
+    df2 = pd.read_csv(file2,usecols=[0,1,2,7])
 
     # Add a header row for labeling
     df1.columns = ["Sobeys_" + str(col) for col in df1.columns]

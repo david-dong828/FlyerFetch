@@ -23,21 +23,45 @@ def preprocess_data(flyerData):
 
     return df,vectorizer
 
-def get_recommendations(df,vectorizer):
-    recommendations = {}
+def generateRecommendations(filePath,selected_categories):
+    df = pd.read_csv(filePath)
+    recommendations = OrderedDict()
 
-    # similarity_matrix = calculate_similarity(df["item_name_vectors"])
-    for category in df["category"].unique():
-        category_items = df[df["category"] == category]
-
-        # Select the item with the lowest normalized price
-        best_item = category_items.loc[category_items['normlized_price'].idxmin()]
-        print(best_item)
-        recommendations[category] = best_item
+    for category in selected_categories:
+        category_items = df[df["predict_category"].str.contains(category,case=False,na=False)]
+        category_items_count = 0
+        for _, row in category_items.iterrows():
+            if category_items_count < 2:
+                item_key = row["Item_Name"].lower()  # Use item name in lowercase as the key to avoid duplicates
+                if item_key not in recommendations:
+                    recommendations[item_key] = {
+                        "Item_Name": row["Item_Name"],
+                        "Price": row["Price"],
+                        "UoM": row["UoM"],
+                        "Category": row["predict_category"]
+                    }
+                    category_items_count += 1
     return recommendations
 
+def get_recommendations(selected_categories):
+    folder_path = 'recommendation'
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path)
+
+    today_date = datetime.now().strftime("%Y-%m-%d")
+    filePath_s = os.path.join(folder_path, "sobeys_" + "addedCategory_" + today_date + ".csv")
+    filePath_w = os.path.join(folder_path, "walmart_" + "addedCategory_" + today_date + ".csv")
+
+    if not os.path.exists(filePath_s) or not os.path.exists(filePath_w):
+        return -1,-1
+
+    sobeys_recommendations = generateRecommendations(filePath_s,selected_categories)
+    walmart_recommendations = generateRecommendations(filePath_w, selected_categories)
+
+    return sobeys_recommendations,walmart_recommendations
+
 def get_recommendation_simple(flyerData):
-    print(flyerData)
+    # print(flyerData)
     folder_path = 'recommendation'
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)

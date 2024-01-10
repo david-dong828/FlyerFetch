@@ -7,6 +7,8 @@ import torch
 from grocery_model import BiLSTMWithXLMRModel
 from transformers import XLMRobertaModel, XLMRobertaTokenizer
 import pickle
+import os
+from datetime import datetime
 import pandas as pd
 
 
@@ -17,13 +19,13 @@ def ini_model():
     tokenizer = XLMRobertaTokenizer.from_pretrained(model_name)
     base_model = XLMRobertaModel.from_pretrained(model_name)
 
-    binary_mask_path = "binary_mask_tensor11.pt"
+    binary_mask_path = "grocery_model/binary_mask_tensor11.pt"
 
     # Load the saved binary mask tensor
     binary_mask_tensor = torch.load(binary_mask_path, map_location=torch.device('cpu'))
 
     model = BiLSTMWithXLMRModel.BiLSTMWithXLMRModel(base_model, n_cate, n_subcate,binary_mask_tensor)
-    model_path = "model_epoch_13_11.pt"
+    model_path = "grocery_model/model_epoch_13_11.pt"
     state_dict = torch.load(model_path, map_location=torch.device('cpu'))
     # print(state_dict.keys())
 
@@ -49,7 +51,7 @@ def model_prediction(model,tokenizer,category_label_mapping,subcategory_label_ma
     inputs = tokenizer(input_text, return_tensors="pt", padding=True, truncation=True, max_length=256)
 
     # Perform a prediction
-    with torch.no_grad():  # This tells PyTorch that we do not need to compute gradients during inference
+    with torch.no_grad():  # Tells PyTorch that we do not need to compute gradients during inference
         input_ids = inputs['input_ids']
         attention_mask = inputs['attention_mask']
         category_probs, subcategory_probs = model(input_ids=input_ids, attention_mask=attention_mask)
@@ -76,19 +78,39 @@ def model_prediction(model,tokenizer,category_label_mapping,subcategory_label_ma
 
     return human_readable_categories,human_readable_subcategories
 
-def main():
-    model,tokenizer = ini_model()
-    category_label_mapping = load_category_mapping("category_label_mapping11.pkl")
-    subcategory_label_mapping = load_category_mapping("subcategory_label_mapping11.pkl")
+def add_predicted_categories(for_predict_file):
+    model, tokenizer = ini_model()
+    category_label_mapping = load_category_mapping("grocery_model/category_label_mapping11.pkl")
+    subcategory_label_mapping = load_category_mapping("grocery_model/subcategory_label_mapping11.pkl")
 
-    for_predict_file = "../cleaned_data/cleaned_sobeysFlyer_2024-01-02.csv"
     df = pd.read_csv(for_predict_file)
 
-    predicated_categories, predicated_subcategories= model_prediction(model, tokenizer, category_label_mapping, subcategory_label_mapping,df["remark"])
+    predicated_categories, predicated_subcategories = model_prediction(model, tokenizer, category_label_mapping,
+                                                                       subcategory_label_mapping, df["remark"])
     df["predict_category"] = predicated_categories
     df["predict_subcategory"] = predicated_subcategories
-    df.to_csv("test_sobeys_predict_cat_subcat.csv", index=False)
-    print("Added predicted categories successfully !")
+
+    df.to_csv(for_predict_file, index=False)  # save back
+    print("Added predicted categories successfully to Clean Data!")
+
+    folder_path = 'recommendation'
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path)
+
+    today_date = datetime.now().strftime("%Y-%m-%d")
+    if "sobeys" in for_predict_file:
+        fileName = "sobeys_" + "addedCategory_" + today_date + ".csv"
+    else:
+        fileName = "walmart_" + "addedCategory_" + today_date + ".csv"
+    filePath = os.path.join(folder_path, fileName)
+
+    df.to_csv(filePath, index=False)
+    print("Added predicted categories successfully to Recommendation!")
+
+def main():
+    for_predict_file = "../cleaned_data/cleaned_sobeysFlyer_2024-01-02.csv"
+    add_predicted_categories(for_predict_file)
+
 
     # input_texts = ["Fresh Pork Loin Back Ribs","ORGANIC Smooth Peanut Butter", "Kombucha or Sparkling Drink",
     #                "ASIAN INSPIRATIONS, WONG WING Frozen Entr??es, Egg Rolls, Spring Rolls or Dumplings, , $5 EACH WHEN YOU BUY 2 OR MORE."]

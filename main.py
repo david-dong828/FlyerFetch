@@ -3,7 +3,7 @@ import csv,os
 
 from flask import Flask,request,render_template,jsonify,Response
 import getFlyer_sobeys_walmart,data_clean
-from grocery_model import train_recomdation_model
+from grocery_model import train_recomdation_model, useBiLSTMmodel
 from itertools import groupby
 import json
 from datetime import datetime
@@ -44,12 +44,12 @@ def read_csv(filePath):
             if any(row[key].strip() for key in row.keys() if 'Walmart' in key):
                 walmart_data.append(row)
 
-        sorted_sobeys = sorted(sobeys_data, key=lambda x: x['Sobeys_category'])
-        sorted_walmart = sorted(walmart_data, key=lambda x: x['Walmart_category'])
+        sorted_sobeys = sorted(sobeys_data, key=lambda x: x['Sobeys_predict_category'])
+        sorted_walmart = sorted(walmart_data, key=lambda x: x['Walmart_predict_category'])
 
         # Group by category
-        grouped_sobeys = groupby(sorted_sobeys, key=lambda x: x['Sobeys_category'])
-        grouped_walmart = groupby(sorted_walmart, key=lambda x: x['Walmart_category'])
+        grouped_sobeys = groupby(sorted_sobeys, key=lambda x: x['Sobeys_predict_category'])
+        grouped_walmart = groupby(sorted_walmart, key=lambda x: x['Walmart_predict_category'])
 
         # Generate HTML tables
         sobeys_headers = [header for header in reader[0].keys() if 'Sobeys' in header and 'category' not in header]
@@ -74,63 +74,48 @@ def showFlyers():
         cleanedFilesPaths = []
         urls = ["https://www.sobeys.com/en/flyer/", "https://www.walmart.ca/en/flyer"]
         for url in urls:
-            cleaned_filePath = sobeys_walmart_flyer(url)
+            cleaned_filePath = sobeys_walmart_flyer(url) #get cleaned data path back
             cleanedFilesPaths.append(cleaned_filePath)
 
         data_clean.combine_data(cleanedFilesPaths[0],cleanedFilesPaths[1])
 
-        train_recomdation_model.get_recommendation_simple(cleanedFilesPaths[0]) # get sobeys/ walmart recomemndations
-        train_recomdation_model.get_recommendation_simple(cleanedFilesPaths[1]) # so no need to run in showRecommendations()
+        # train_recomdation_model.get_recommendation_simple(cleanedFilesPaths[0]) # get sobeys/ walmart SIMPLE recomemndations
+        # train_recomdation_model.get_recommendation_simple(cleanedFilesPaths[1]) # so no need to run in showRecommendations()
+
+        # useBiLSTMmodel.add_predicted_categories(cleanedFilesPaths[0]) # Add predicted categories and subcategories
+        # useBiLSTMmodel.add_predicted_categories(cleanedFilesPaths[1]) # for both Sobeys n Walmart. Save to recommendation folder
 
     print(f"done {filePath}")
     sobeys_table, walmart_table = read_csv(filePath)
 
     return jsonify(sobeys=sobeys_table, walmart=walmart_table)
 
-@app.route("/recommendations",methods=['GET'])
+def jsnonTolist(recommendationJson):
+    recommendationList = []
+    for key, items in recommendationJson.items():
+        print(items)
+        new_item = {
+            "name": items["Item_Name"],
+            "price": float(items["Price"].replace("$", "")),  # Convert price to float and remove '$'
+            "uom": items["UoM"],
+            "category":items["Category"]
+
+        }
+        recommendationList.append(new_item)
+    return recommendationList
+
+@app.route("/recommendations",methods=['POST'])
 def showRecommendations():
-    folder_path = 'recommendation'
-    fileName1 = "walmart_recommendations_" + datetime.now().strftime("%Y-%m-%d") + ".json"
-    filePath1 = os.path.join(folder_path, fileName1)
-    fileName2 = "sobeys_recommendations_" + datetime.now().strftime("%Y-%m-%d") + ".json"
-    filePath2 = os.path.join(folder_path, fileName2)
+    selected_categories = request.json['categories']
+    # print(selected_categories)
+    sobeys_recommendations_json,walmart_recommendations_json = train_recomdation_model.get_recommendations(selected_categories)
+    # print("sobeys_recommendations_json ",sobeys_recommendations_json)
 
-    walmart_recommendations = []
-    sobeys_recommendations = []
+    if sobeys_recommendations_json != -1:
+        sobeys_recommendations = jsnonTolist(sobeys_recommendations_json)
+        walmart_recommendations = jsnonTolist(walmart_recommendations_json)
 
-    # Load Walmart recommendations if file exists
-    if os.path.exists(filePath1):
-        try:
-            with open(filePath1, 'r', encoding='utf-8') as file:
-                walmart_json = json.load(file)
-                for key,items in walmart_json.items():
-                    print(items)
-                    new_item = {
-                        'name': items['Item_Name'],
-                        'price': float(items['Price'].replace('$', '')),  # Convert price to float and remove '$'
-                        'uom': items['UoM']
-                    }
-                    walmart_recommendations.append(new_item)
-            print(walmart_recommendations)
-        except json.JSONDecodeError:
-            print(f"Error reading {filePath1}")
-
-    # Load Sobeys recommendations if file exists
-    if os.path.exists(filePath2):
-        try:
-            with open(filePath2, 'r', encoding='utf-8') as file:
-                sobeys_json = json.load(file)
-                for key,items in sobeys_json.items():
-                    new_item = {
-                        'name': items['Item_Name'],
-                        'price': float(items['Price'].replace('$', '')),  # Convert price to float and remove '$'
-                        'uom': items['UoM']
-                    }
-                    sobeys_recommendations.append(new_item)
-        except json.JSONDecodeError:
-            print(f"Error reading {filePath2}")
-
-    return jsonify(sobeys=sobeys_recommendations, walmart=walmart_recommendations)
+        return jsonify(sobeys=sobeys_recommendations, walmart=walmart_recommendations)
 
 def main():
     # urls = ["https://www.sobeys.com/en/flyer/", "https://www.walmart.ca/en/flyer"]
