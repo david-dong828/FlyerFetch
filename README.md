@@ -41,13 +41,18 @@ FlyerFetch is an innovative application designed to save time and enhance the sh
 > **Result**
 
 
-https://github.com/david-dong828/FlyerFetch/assets/106771290/5b659e0b-da0b-433c-a3d0-f97346725656
+<!--- https://github.com/david-dong828/FlyerFetch/assets/106771290/5b659e0b-da0b-433c-a3d0-f97346725656 -->
+
+https://github.com/david-dong828/FlyerFetch/assets/106771290/2f093410-fa52-4061-876f-ffe16ad4517c
+
+
 
 ------
 
 > **NEXT UPDATE**
 
-- Upgrade the Classification model
+- [x] Upgrade the Classification model
+      - LTSM + XLMRobertaModel
 
-- Add more groceries
+- [ ] Add more groceries
 
