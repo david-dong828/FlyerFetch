@@ -34,7 +34,11 @@ FlyerFetch is an innovative application designed to save time and enhance the sh
 - **Start the Application**: Run main.py to start the Flask server.
 - **Access the Web Interface**: Open a web browser and navigate to the local server address (typically localhost with a designated port).
   - **First-Time Use**: The initial run may take longer due to the absence of a local data cache. The application will scrape and process data during this time.
-  - **Subsequent Use**: Data processing is faster after the initial setup, as the application utilizes locally cached data. 
+  - **Subsequent Use**: Data processing is faster after the initial setup, as the application utilizes locally cached data.
+ 
+- **Note:**
+  - The model "model_epoch_13_11.pt" used for recommendation engine is too big to upload Github
+  - You may want to train the model by yourself. If so, you could run the single file *"BiLSTMWithXLMRModel.py"* to get your trained model.
 
 ------
 
